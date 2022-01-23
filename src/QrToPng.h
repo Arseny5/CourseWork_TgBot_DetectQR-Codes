@@ -1,7 +1,3 @@
-//
-// Created by remy on 07-06-20.
-//
-
 #ifndef QR_TO_PNG_H
 #define QR_TO_PNG_H
 
