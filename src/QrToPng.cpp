@@ -7,7 +7,7 @@ QrToPng::QrToPng(std::string fileName, int imgSize, int minModulePixelSize, std:
 }
 
 bool QrToPng::writeToPNG() {
-    /* text is required */
+    /* Наличие текста необходимо */
     if (_text.empty())
         return false;
 
@@ -59,12 +59,12 @@ bool QrToPng::_writeToPNG(const qrcodegen::QrCode &qrData) const {
     const uint8_t blackPixel = 0x00;
     const uint8_t whitePixel = 0xFF;
 
-    /* The below loop converts the qrData to RGB8.8.8 pixels and writes it with
-     * the tinyPNGoutput library. since we probably have requested a larger
-     * qr module pixel size we must transform the qrData modules to be larger
-     * pixels (than just 1x1). */
+    /* Приведенный ниже цикл преобразует qrData в пиксели RGB 8.8.8 и записывает их с помощью
+     * библиотеки tinyPNGputput. Так как мы, вероятно, запросили больший
+     * размер QR-кода в пикселях, мы должны преобразовать модули qrData, чтобы они имели больше
+     * пикселей (чем просто 1x1). */
 
-    // border above
+    // Верхняя граница
     for (int i = 0; i < pngWH; i++) // row
         for (int j = 0; j < pixelsWHPerModule; j++) // module pixel (height)
             tmpData.insert(tmpData.end(), {whitePixel, whitePixel, whitePixel});
@@ -74,11 +74,11 @@ bool QrToPng::_writeToPNG(const qrcodegen::QrCode &qrData) const {
 
     for (int qrModuleAtY = 0; qrModuleAtY < qrSize; qrModuleAtY++) {
         for (int col = 0; col < pixelsWHPerModule; col++) {
-            // border left
+            // Граница слева
             for (int i = 0; i < qrSizeFitsInMaxImgSizeTimes; ++i)
                 tmpData.insert(tmpData.end(), {whitePixel, whitePixel, whitePixel});
 
-            // qr module to pixel
+            // QR модуль в пиксель
             for (int qrModuleAtX = 0; qrModuleAtX < (qrSize); qrModuleAtX++) {
             for (int row = 0; row < qrSizeFitsInMaxImgSizeTimes; ++row) {
                     if (qrData.getModule(qrModuleAtX, qrModuleAtY)) {
@@ -89,19 +89,19 @@ bool QrToPng::_writeToPNG(const qrcodegen::QrCode &qrData) const {
                     }
                 }
             }
-            // border right
+            // Граница справа
             for (int i = 0; i < qrSizeFitsInMaxImgSizeTimes; ++i)
                 tmpData.insert(tmpData.end(), {whitePixel, whitePixel, whitePixel});
 
-            // write the entire  row
+            // Запись всего ряда
             pngout.write(tmpData.data(), static_cast<size_t>(tmpData.size() / 3));
             tmpData.clear();
         }
     }
 
-    // border below
+    // Нижняя граница
     for (int i = 0; i < pngWH; i++) // row
-        for (int j = 0; j < pixelsWHPerModule; j++) // module pixel (height)
+        for (int j = 0; j < pixelsWHPerModule; j++) // module pixel (высота)
             tmpData.insert(tmpData.end(), {whitePixel, whitePixel, whitePixel});
 
     pngout.write(tmpData.data(), static_cast<size_t>(tmpData.size() / 3));
