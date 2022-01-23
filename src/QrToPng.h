@@ -1,10 +1,6 @@
 #ifndef QR_TO_PNG_H
 #define QR_TO_PNG_H
 
-/* If your compiler is recent enough,
- * you don't need to include '::experimental::',
- * you can just include "::filesystem". The below
- * code makes both work, accessible at 'fs::'. */
 #if defined(__GNUC__) && __GNUC__ < 9
 #include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
@@ -23,22 +19,21 @@ namespace fs = std::filesystem;
 class QrToPng {
 public:
     /**
-     * Gives an object containing all the data to create the QR code. When @writeToPNG() is called,
-     * the actual file is constructed and written.
-     * The image is scaled to fit in the given size as much as possible relative to the QR code
-     * size.
-     * @param fileName relative or absolute filename to write image to. Relative will be in CWD.
-     * @param imgSize The height and width of the image. Image is square, so will be width and height.
-     * @param minModulePixelSize How many pixels big should a qr module be (a white or black dot)?
-     * @param text The text to encode in the QR code.
-     * @param overwriteExistingFile Overwrite if a file with @fileName already exists?
-     * @param ecc error correction (low,mid,high).
+     * Создает объект, содержащий все данные для создания QR-кода. Когда вызывается @writeToPNG(),
+     * данный файл создается и записывается.
+     * Изображение масштабируется, чтобы максимально соответствовать заданному размеру относительно размера QR-кода
+     * @param fileName - относительное или абсолютное имя файла для записи изображения. 
+     * @param imgSize - Высота и ширина изображения. Изображение квадратное, поэтому будет ширина и высота.
+     * @param minModulePixelSize - Сколько пикселей должен быть QR-code (белая или черная пиксель)
+     * @param text - Текст для кодирования в QR-код.
+     * @param overwriteExistingFile - Перезаписывает, если файл с @fileName уже существует
+     * @param исправление ошибок ecc (low,mid,high).
      */
     QrToPng(std::string fileName, int imgSize, int minModulePixelSize, std::string text,
             bool overwriteExistingFile, qrcodegen::QrCode::Ecc ecc);
 
-    /** Writes a QrToPng object to a png file at @_fileName.
-     * @return true if file could be written, false if file could not be written */
+    /** Записывает объект QrToPng в файл png по адресу @_fileName.
+     *  @return true, если файл может быть записан, и false, если файл не может быть записан */
     bool writeToPNG();
 
 private:
@@ -49,16 +44,16 @@ private:
     bool _overwriteExistingFile;
     qrcodegen::QrCode::Ecc _ecc;
 
-    /** Writes the PNG file. Constructs a vector with
-     * each element being a row of RGB 8.8.8 pixels, the
-     * format is geared towards the tinypngoutput library.
-     * @param qrData the code returned by the qrcodegen library
-     * @return true if file could be written, false if file could not be written */
+    /** Записывает файл PNG. Создает вектор с
+     * каждым элементом представляющим собой строку пикселей RGB 8.8.8.
+     * Формат ориентирован на библиотеку tinypngoutput.
+     * @param qrData код, возвращаемый библиотекой qrcodegen
+     * @return true, если файл может быть записан, и false, если файл не может быть записан */
     [[nodiscard]] bool _writeToPNG(const qrcodegen::QrCode &qrData) const;
 
-    /* returns the width/height of the image based on the max image size
-    * and qr width. Ex. If the max img size is 90, the qr code size 29
-    * the qr module pixel size will be 3, the image size will be 3*29=87. */
+    /* Возвращает ширину/высоту изображения на основе максимального размера изображения
+    * и ширины QR-кода. Если максимальный размер изображения равен 90, размер QR-кода равен 29.
+    * Размер пикселя QR-кода будет 3, размер изображения будет 3*29=87. */
     [[nodiscard]] uint32_t _imgSize(const qrcodegen::QrCode &qrData) const;
 
     [[nodiscard]] uint32_t _imgSizeWithBorder(const qrcodegen::QrCode &qrData) const;
