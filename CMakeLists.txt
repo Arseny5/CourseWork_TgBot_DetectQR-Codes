@@ -22,10 +22,10 @@ include_directories( ${OpenCV_INCLUDE_DIRS} )
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(ZBar REQUIRED IMPORTED_TARGET zbar)
 
-add_library(QRcapture 
-        src/QRcapture.h
-        src/QRcapture.cpp
-)
+# add_library(QRcapture 
+#        src/QRcapture.h
+#        src/QRcapture.cpp
+# )
 
 set(Libs
     /usr/local/lib/libTgBot.a
