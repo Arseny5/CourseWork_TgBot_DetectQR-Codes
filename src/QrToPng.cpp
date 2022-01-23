@@ -1,7 +1,3 @@
-//
-// Created by remy on 02-06-20.
-//
-
 #include "QrToPng.h"
 
 QrToPng::QrToPng(std::string fileName, int imgSize, int minModulePixelSize, std::string text,
