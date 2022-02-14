@@ -41,6 +41,11 @@ Code39; UPC-A; EAN-8; «Interleaved 2of5»; QR-codes
 1. Обновление Ubuntu
 2. Установка зависимостей
 3. Скачивание OpenCV с официальных репозиториев на GitHub
+```
+/opt$ git clone https://github.com/Itseez/opencv.git
+/opt$ git clone https://github.com/Itseez/opencv_contrib.git
+```
+
 
 
 
