@@ -94,7 +94,7 @@ $ sudo apt install zbar-tools
 
 ![alt text](5.jpg "UI")
 
-Необходимо прописать в терминале:
+После чего необходимо прописать в терминале:
 ```
 cmake ..
 make
