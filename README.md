@@ -33,7 +33,7 @@ Code39; UPC-A; EAN-8; «Interleaved 2of5»; QR-codes
 каждом запросе на генерацию и после чего выводится пользователю.
 
 # Сборка проекта
-<b>1. Установка OpenCV</b><br>
+<b>1) Установка OpenCV</b><br>
 Для работы программы понадобятся дополнительные библиотеки и утилиты. Для 
 обработки изображений использовалась библиотека OpenCV. Чтобы решение заработало, 
 надо скачать эту библиотеку с официального сайта https :// opencv. org под язык C++. Проще
@@ -45,6 +45,42 @@ Code39; UPC-A; EAN-8; «Interleaved 2of5»; QR-codes
 /opt$ git clone https://github.com/Itseez/opencv.git
 /opt$ git clone https://github.com/Itseez/opencv_contrib.git
 ```
+4. Сборка и установка OpenCV.
+```
+/opt/opencv/release$ cmake -D BUILD_TIFF=ON -D WITH_CUDA=OFF -D ENABLE_AVX=OFF -
+D WITH_OPENGL=OFF -D WITH_OPENCL=OFF -D WITH_IPP=OFF -D WITH_TBB=ON -D 
+BUILD_TBB=ON -D WITH_EIGEN=OFF -D WITH_V4L=OFF -D WITH_VTK=OFF -D 
+BUILD_TESTS=OFF -D BUILD_PERF_TESTS=OFF -D CMAKE_BUILD_TYPE=RELEASE -D 
+CMAKE_INSTALL_PREFIX=/usr/local -D 
+OPENCV_EXTRA_MODULES_PATH=/opt/opencv_contrib/modules /opt/opencv/
+```
+5. Проверка успешности установки OpenCV на ПК путем написания команды 
+```
+$ pkg-config --modversion opencv
+3.2.x
+```
+В случае, если возвращаемым результатом будет версия OpenCV, то установка прошла 
+<b>успешно</b>.
+
+<b>2) Установка tgbot-cpp</b>
+Для работы с Telegram использовалась библиотека tgbot-cpp – библиотека С++14
+для работы с Telegram bot API. Во-первых, вам нужно установить некоторые зависимости,
+13 такие как Boost, и инструменты сборки, такие как CMake, если их нет. 
+В дистрибутивах на базе Ubuntu это можно сделать с помощью:
+```
+$ sudo apt-get install g++ make binutils cmake libssl-dev libboost-system-dev 
+zlib1g-dev
+```
+
+```
+$ git clone https://github.com/reo7sp/tgbot-cpp 
+$ cd tgbot-cpp 
+$ cmake . 
+$ make -j4 
+$ sudo make install
+```
+
+
 
 
 
