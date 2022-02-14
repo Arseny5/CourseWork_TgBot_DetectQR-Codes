@@ -87,6 +87,18 @@ $ sudo make install
 $ sudo apt install zbar-tools
 ```
 
+<b>4) Сборка и инсталлирование проекта</b><br>
+После установки OpenCV, tg-bot, ZBAR и добавления QR-Code-Generator и tinypngout
+можно переходить к сборке программы с помощью CMake. Необходимо
+создать директорию, в которой в последствии будет билдиться проект - ../build
+![alt text](1.jpg "UI")
+Необходимо прописать в терминале:
+```
+cmake ..
+make
+src/echobot
+```
+
 
 
 
